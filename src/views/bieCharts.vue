@@ -3,7 +3,7 @@
     <oa-breadcrumb :levelConfig="levelConfig" class="oa-breadcrumb"></oa-breadcrumb>
     <div class="module-content">
       <div>
-          <div id="bie" :style="{width: '300px', height: '300px'}"></div>
+          <div id="bie" :style="{width: '800px', height: '400px'}"></div>
       </div>
     </div>
   </el-main>
@@ -29,7 +29,7 @@ export default {
   methods:{
     drawLine(){
         // 基于准备好的dom，初始化echarts实例
-        let myChart = this.$echarts.init(document.getElementById('myChart'))
+        let myChart = this.$echarts.init(document.getElementById('bie'))
         // 绘制图表
         myChart.setOption({
             title: { text: '在Vue中使用echarts' },

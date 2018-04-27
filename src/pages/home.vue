@@ -1,7 +1,7 @@
 <template>
   <el-container class="main-content-wrapper">
     <!-- <el-header>Header</el-header> -->
-    <oa-header></oa-header>
+    <oa-header @emitLoginOut="loginOut"></oa-header>
     <el-container class="main-wrapper">
       <oa-left :routerConfig="leftNavRouter"></oa-left>
       <!-- <el-aside width="200px">Aside</el-aside> -->
@@ -35,6 +35,11 @@ export default {
       }
     }
     this.leftNavRouter = renderNavData;
+  },
+  methods:{
+    loginOut(){
+      this.$router.push("/")
+    }
   }
 }
 </script>
