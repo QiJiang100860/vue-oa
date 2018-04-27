@@ -2,7 +2,7 @@
   <el-header class="oa-header">
     <el-row :gutter="22">
       <el-col :span="2">后台管理系统</el-col>
-      <el-col :span="1" :offset="19">
+      <el-col :span="1" :offset="18">
         <el-dropdown class="el-dropdown-headicon-wrapper">
           <div class="el-dropdown-headicon">
             <img src="" alt="">
@@ -13,15 +13,41 @@
           </el-dropdown-menu>
         </el-dropdown>
       </el-col>
-      <el-col  class="el-dropdown-time" :span="2"><span>2018-04-27</span><span class="lastspan">17:57</span></el-col>
+      <el-col  class="el-dropdown-time" :span="3">
+        <span>{{timeYear}}</span>
+        <span class="lastspan">{{timeDay}}</span>
+      </el-col>
     </el-row>
   </el-header>
 </template>
 <script>
+import moment from "moment";
 export default {
+  data(){
+    return {
+      timeYear:"",
+      timeDay:""
+    }
+  },
+  beforeMount(){
+
+  },
+  mounted(){
+    this.initTime()
+  },
   methods:{
     loginOut(){
       this.$emit('emitLoginOut')
+    },
+    initTime(){
+      setInterval(()=>{
+        let nowTime = moment().format();
+        this.timeYear = nowTime.split("T")[0];
+        this.timeDay = nowTime.split("T")[1].split("+")[0];
+      },1000)
+      
+      
+      
     }
   }
 }
