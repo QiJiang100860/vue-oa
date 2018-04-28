@@ -15,8 +15,6 @@
         <el-table-column prop="city" label="市区"></el-table-column>
         <el-table-column prop="address" label="地址"></el-table-column>
         <el-table-column prop="zip" label="邮编"></el-table-column>
-
-
         <el-table-column label="操作">
             <template slot-scope="scope">
                 <el-button @click.native.prevent="deleteRow(scope.$index, tableData3)" type="danger" icon="el-icon-delete" circle size="small"></el-button>

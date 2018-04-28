@@ -2,24 +2,47 @@
   <el-main class="module-wrapper">
     <oa-breadcrumb :levelConfig="levelConfig" class="oa-breadcrumb"></oa-breadcrumb>
     <div class="module-content">
-      <div>22</div>
+      <div class="seacher-content">
+        <el-button type="primary" size="small">搜索</el-button>
+      </div>
+      <oa-page-table
+      :table="tableCfg"
+      :pagination='paginationCfg'
+      @emitPageSize="pageSize"
+      @emitPageIndex="pageIndex"
+      ></oa-page-table>
     </div>
   </el-main>
 </template>
 <script>
 import oaBreadcrumb from "@/components/oaBreadcrumb";
+import oaPageTable from "@/components/oaPageTable";
 export default {
-  components:{oaBreadcrumb},
+  components:{oaBreadcrumb,oaPageTable},
   data(){
     return {
       levelConfig:[
         {name:'表格',path:''},
         {name:'表格2',path:''}
-      ]
+      ],
+      //表格配置项
+      tableCfg:{
+        data:""
+      },
+      //分页配置项
+      paginationCfg:{}
     }
   },
   beforeMount(){
     
+  },
+  methods:{
+    pageSize(num){
+      alert(`一页显示${num}条`)
+    },
+    pageIndex(index){
+      alert(`显示第${index}页的数据`)
+    }
   }
 }
 </script>
@@ -51,6 +74,12 @@ export default {
     padding-top:55px;
     padding-left: 15px;
     overflow-y: auto;
+    .seacher-content{
+      background: #ffffff;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      padding: 15px;
+    }
   }
 }
 </style>
