@@ -17,6 +17,7 @@
   </div>
 </template>
 <script>
+import * as Until from "../until";
 export default {
   props:['currentPage'],
   data(){
@@ -34,6 +35,7 @@ export default {
         let sHeight = document.querySelector('.seacher-content').clientHeight;
         let otherHeight = 50+40+55+sHeight+10+16+52;
         let tableHeight = winHeight-otherHeight;
+        
         this.tableHeight = tableHeight;
     },
     handleSizeChange(val) {
