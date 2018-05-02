@@ -2,12 +2,13 @@
   <el-main class="module-wrapper">
     <oa-breadcrumb :levelConfig="levelConfig" class="oa-breadcrumb"></oa-breadcrumb>
     <div class="module-content">
-      <div>高德地图</div>
+      <div id="container"></div>
     </div>
   </el-main>
 </template>
 <script>
 import oaBreadcrumb from "@/components/oaBreadcrumb";
+import {importMap} from "@/until/importMapApi";
 export default {
   components:{oaBreadcrumb},
   data(){
@@ -20,6 +21,21 @@ export default {
   },
   beforeMount(){
     
+  },
+  mounted(){
+    importMap('gaode',()=>{
+        let map = new AMap.Map('container', {
+            resizeEnable: true,
+            zoom:11,
+            center: [116.397428, 39.90923]
+        });
+        map.plugin(["AMap.ToolBar"], function() {
+          map.addControl(new AMap.ToolBar());
+        });
+        if(location.href.indexOf('&guide=1')!==-1){
+          map.setStatus({scrollWheel:false})
+        }
+      });
   }
 }
 </script>
@@ -51,6 +67,10 @@ export default {
     padding-top:55px;
     padding-left: 15px;
     overflow-y: auto;
+    #container{
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 </style>
