@@ -1,12 +1,16 @@
 <template>
   <el-aside class="oa-left" width="210px">
      <el-menu class="oa-el-maue" :default-openeds="['0']">
-
       <el-submenu v-for="(item,index) in routerConfig" :key="index" :index="''+index">
         <template slot="title"><i class="el-icon-message"></i>{{item.name}}</template>
-        <el-menu-item v-for="(citem,cindex) in item.children" :key="cindex" :index="''+index+'-'+cindex" @click="toViews(item.path,citem.path)">{{citem.name}}</el-menu-item>
+        <div v-for="(citem,cindex) in item.children" :key="cindex">
+          <el-menu-item v-if="!citem.children" :index="''+index+'-'+cindex" @click="toViews(item.path,citem.path)">{{citem.name}}</el-menu-item>
+          <el-submenu :index="''+index+'-'+cindex" v-else>
+            <span slot="title">{{citem.name}}</span>
+            <el-menu-item v-for="(ccitem,ccindex) in citem.children" :key="ccindex" :index="''+index+'-'+cindex+ccindex" @click="toViews(item.path,citem.path,ccitem.path)">{{ccitem.name}}</el-menu-item>
+          </el-submenu>
+        </div>
       </el-submenu>
-
     </el-menu>
   </el-aside>
   <!-- <el-aside class="oa-left" width="210px">
@@ -46,8 +50,14 @@ export default {
     }
   },
   methods:{
-    toViews(path1,path2){
-      let path = `${path1}/${path2}`;
+    toViews(){
+      // let path = `${path1}/${path2}`;
+      let pathArr = arguments;
+      let path = "";
+      for(let index in pathArr){
+        path += index==0?pathArr[index]:('/'+pathArr[index]);
+      }
+      debugger
       this.$router.push(path);
     },
     handleOpen(key, keyPath) {

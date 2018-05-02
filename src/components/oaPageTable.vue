@@ -17,7 +17,6 @@
   </div>
 </template>
 <script>
-import * as Until from "../until";
 export default {
   props:['currentPage'],
   data(){

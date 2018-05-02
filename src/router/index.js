@@ -12,6 +12,7 @@ const addRoute = (path)=>{
 }
 
 export default new Router({
+  scrollBehavior:() => ({ y: 0 }),
   routes: [
     {
       path:'/',
@@ -41,8 +42,8 @@ export default new Router({
       name: '表格',
       component: addRoute('p-home'),
       children:[
-        {path:'table1',name:'table1',component: addRoute('v-table1')},
-        {path:'table2',name:'table2',component: addRoute('v-table2')}
+        {path:'table1',name:'普通表格',component: addRoute('v-table1')},
+        {path:'table2',name:'带分页的表格',component: addRoute('v-table2')}
       ]
     },
     //地图模块
@@ -66,12 +67,17 @@ export default new Router({
       children:[
         {
           path:'two',
+          redirect:"/one/two/three",
           name:'二级',
-          redirect:'/one/two/three',
           component: addRoute('v-oneTwoThree'),
           children:[
-            {path:'three',name:'三级',component: addRoute('v-oneTwoThree')},
+            {path:'three',name:'三级'}
           ]
+        },
+        {
+          path:'two1',
+          name:'只有二级',
+          component: addRoute('v-oneTwo1')
         }
       ]
     },

@@ -26,7 +26,6 @@ export default {
   },
   beforeMount(){
     let routerArr = this.$router.options.routes;
-    debugger
     let renderNavData = []
     for(let item of routerArr){
       if(item.meta){
@@ -35,6 +34,7 @@ export default {
         }
       }
     }
+    debugger
     this.leftNavRouter = renderNavData;
   },
   methods:{
